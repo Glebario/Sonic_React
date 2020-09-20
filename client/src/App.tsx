@@ -1,32 +1,33 @@
-import React from 'react';
 import './App.css';
-import AuthFakeApi from "./data/auth/AuthFakeApi";
-import AuthBusinessStore from "./domain/entity/auth/models/AuthBusinessStore";
-import LoginUseCase from "./domain/interactors/auth/LoginUseCase";
-import AuthViewStoreImpl from "./presentation/view-model/auth/AuthViewStoreImpl";
-import AuthComponent from "./presentation/view/auth/AuthComponent";
-import {Provider} from "mobx-react";
 
-function App(): JSX.Element {
-  // data layer
-  const authRepository = new AuthFakeApi();
-  // domain layer
-  const authHolder = new AuthBusinessStore();
-  const loginUseCase = new LoginUseCase(authRepository, authHolder);
-  // view r
-  const authViewStore = new AuthViewStoreImpl(loginUseCase, authHolder);
+import React from 'react';
+import { observer, Provider } from "mobx-react";
 
-  const stores = {
-      authViewStore
-  }
+import LoginModel from "./domain/models/LoginModel"
+import AuthRepository from "./domain/repositories/LoginRepository";
+
+import { LoginPageView } from "./pages/LoginPageView";
+
+@observer
+class App extends React.Component {
+  render(): JSX.Element {
+    // data layer
+    const authRepository = new AuthRepository();
+    const authModel = new LoginModel(authRepository);
+
+    const stores = {
+      authRepository,
+      authModel,
+    };
 
     return (
       <Provider {...stores}>
-          <div className="app-container d-flex container-fluid">
-            <AuthComponent />
-          </div>
+        <div className="app-container d-flex container-fluid">
+          <LoginPageView model={authModel} />
+        </div>
       </Provider>
-  );
+    );
+  }
 }
 
 export default App;
