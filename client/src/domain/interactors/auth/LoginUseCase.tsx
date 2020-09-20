@@ -1,11 +1,11 @@
 import AuthRepository from '../../repository/auth/AuthRepository';
-import AuthHolder from '../../entity/auth/models/AuthHolder';
+import AuthBusinessStore from '../../entity/auth/models/AuthBusinessStore';
 
 export default class LoginUseCase {
   private authRepository: AuthRepository;
-  private authHolder: AuthHolder;
+  private authHolder: AuthBusinessStore;
 
-  public constructor(authRepository: AuthRepository, authHolder: AuthHolder) {
+  public constructor(authRepository: AuthRepository, authHolder: AuthBusinessStore) {
     this.authRepository = authRepository;
     this.authHolder = authHolder;
   }

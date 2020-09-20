@@ -1,27 +1,28 @@
-import AuthViewModel from './AuthViewModel';
+import AuthViewStore from './AuthViewStore';
 import BaseView from '../../view/BaseView';
 import LoginUseCase from '../../../domain/interactors/auth/LoginUseCase';
-import AuthHolder from '../../../domain/entity/auth/models/AuthHolder';
+import AuthBusinessStore from '../../../domain/entity/auth/models/AuthBusinessStore';
 import AuthListener from '../../../domain/entity/auth/models/AuthListener';
 import FormValidator from '../../util/FormValidator';
+import {action, observable} from "mobx";
 
-export default class AuthViewModelImpl implements AuthViewModel, AuthListener {
-  public emailQuery: string;
-  public passwordQuery: string;
-  public isSignInButtonVisible: boolean;
-  public isSignOutButtonVisible: boolean;
+export default class AuthViewStoreImpl implements AuthViewStore {
+  @observable public emailQuery: string;
+  @observable public passwordQuery: string;
+  @observable public isSignInButtonVisible: boolean;
+  @observable public isSignOutButtonVisible: boolean;
 
-  public isShowError: boolean;
-  public errorMessage: string;
+  @observable public isShowError: boolean;
+  @observable public errorMessage: string;
 
-  public authStatus: string;
-  public isAuthStatusPositive: boolean;
+  @observable public authStatus: string;
+  @observable public isAuthStatusPositive: boolean;
 
-  private baseView?: BaseView;
+  //private baseView?: BaseView;
   private loginUseCase: LoginUseCase;
-  private authHolder: AuthHolder;
+  private authBusinessStore: AuthBusinessStore;
 
-  public constructor(loginUseCase: LoginUseCase, authHolder: AuthHolder) {
+  public constructor(loginUseCase: LoginUseCase, authBusinessStore: AuthBusinessStore) {
     this.emailQuery = '';
     this.passwordQuery = '';
     this.isSignInButtonVisible = true;
@@ -34,21 +35,21 @@ export default class AuthViewModelImpl implements AuthViewModel, AuthListener {
     this.isAuthStatusPositive = false;
 
     this.loginUseCase = loginUseCase;
-    this.authHolder = authHolder;
+    this.authBusinessStore = authBusinessStore;
 
-    this.authHolder.addAuthListener(this);
+    //this.authHolder.addAuthListener(this);
   }
 
-  public attachView = (baseView: BaseView): void => {
-    this.baseView = baseView;
-  };
+  // public attachView = (baseView: BaseView): void => {
+  //   this.baseView = baseView;
+  // };
+  //
+  // public detachView = (): void => {
+  //   this.baseView = undefined;
+  // };
 
-  public detachView = (): void => {
-    this.baseView = undefined;
-  };
-
-  public onAuthChanged = (): void => {
-    if (this.authHolder.isUserAuthorized()) {
+  @action public onAuthChanged = (): void => {
+    if (this.authBusinessStore.isUserAuthorized) {
       this.isSignInButtonVisible = false;
       this.isSignOutButtonVisible = true;
       this.authStatus = 'authorized';
@@ -60,22 +61,22 @@ export default class AuthViewModelImpl implements AuthViewModel, AuthListener {
       this.isAuthStatusPositive = false;
     }
 
-    this.notifyViewAboutChanges();
+    //this.notifyViewAboutChanges();
   };
 
-  public onEmailQueryChanged = (loginQuery: string): void => {
+  @action public onEmailQueryChanged = (loginQuery: string): void => {
     this.emailQuery = loginQuery;
-    this.notifyViewAboutChanges();
+    //this.notifyViewAboutChanges();
   };
 
-  public onPasswordQueryChanged = (passwordQuery: string): void => {
+  @action public onPasswordQueryChanged = (passwordQuery: string): void => {
     this.passwordQuery = passwordQuery;
-    this.notifyViewAboutChanges();
+    //this.notifyViewAboutChanges();
   };
 
-  public onClickSignIn = async (): Promise<void> => {
+  @action public onClickSignIn = async (): Promise<void> => {
     if (!this.validateLoginForm()) {
-      this.notifyViewAboutChanges();
+      //this.notifyViewAboutChanges();
       return;
     }
 
@@ -88,14 +89,14 @@ export default class AuthViewModelImpl implements AuthViewModel, AuthListener {
       this.isShowError = true;
     }
 
-    this.notifyViewAboutChanges();
+    //this.notifyViewAboutChanges();
   };
 
-  public onClickSignOut = (): void => {
-    this.authHolder.onSignedOut();
+  @action public onClickSignOut = (): void => {
+    this.authBusinessStore.onSignedOut();
   };
 
-  private validateLoginForm = (): boolean => {
+  @action private validateLoginForm = (): boolean => {
     if (!this.emailQuery) {
       this.isShowError = true;
       this.errorMessage = 'Email cannot be empty';
@@ -129,9 +130,9 @@ export default class AuthViewModelImpl implements AuthViewModel, AuthListener {
     return true;
   }
 
-  private notifyViewAboutChanges = (): void => {
-    if (this.baseView) {
-      this.baseView.onViewModelChanged();
-    }
-  };
+  // private notifyViewAboutChanges = (): void => {
+  //   if (this.baseView) {
+  //     this.baseView.onViewModelChanged();
+  //   }
+  // };
 }

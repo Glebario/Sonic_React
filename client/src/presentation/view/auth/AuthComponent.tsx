@@ -1,10 +1,11 @@
 import React from 'react';
 import './auth-component.css';
 import BaseView from '../BaseView';
-import AuthViewModel from '../../view-model/auth/AuthViewModel';
+import AuthViewStore from '../../view-model/auth/AuthViewStore';
+import {inject, observer} from "mobx-react";
 
 export interface AuthComponentProps {
-  authViewModel: AuthViewModel;
+  authViewStore: AuthViewStore;
 }
 
 export interface AuthComponentState {
@@ -20,52 +21,54 @@ export interface AuthComponentState {
   isAuthStatusPositive: boolean;
 }
 
-export default class AuthComponent extends React.Component<AuthComponentProps, AuthComponentState>
-  implements BaseView {
-  private authViewModel: AuthViewModel;
+@inject("authViewStore")
+@observer
+export default class AuthComponent extends React.Component<any, AuthComponentState> {
+  private authViewModel: AuthViewStore;
 
-  public constructor(props: AuthComponentProps) {
+  public constructor(props: any) {
     super(props);
 
-    const { authViewModel } = this.props;
-    this.authViewModel = authViewModel;
+    const { authViewStore } = this.props;
+    this.authViewModel = authViewStore;
 
     this.state = {
-      emailQuery: authViewModel.emailQuery,
-      passwordQuery: authViewModel.passwordQuery,
-      isSignInButtonVisible: authViewModel.isSignInButtonVisible,
-      isSignOutButtonVisible: authViewModel.isSignOutButtonVisible,
+      emailQuery: authViewStore.emailQuery,
+      passwordQuery: authViewStore.passwordQuery,
+      isSignInButtonVisible: authViewStore.isSignInButtonVisible,
+      isSignOutButtonVisible: authViewStore.isSignOutButtonVisible,
 
-      isShowError: authViewModel.isShowError,
-      errorMessage: authViewModel.errorMessage,
+      isShowError: authViewStore.isShowError,
+      errorMessage: authViewStore.errorMessage,
 
-      authStatus: authViewModel.authStatus,
-      isAuthStatusPositive: authViewModel.isAuthStatusPositive,
+      authStatus: authViewStore.authStatus,
+      isAuthStatusPositive: authViewStore.isAuthStatusPositive,
     };
+    console.log(authViewStore.emailQuery)
   }
 
-  public componentDidMount(): void {
-    this.authViewModel.attachView(this);
-  }
+  // public componentDidMount(): void {
+  //   this.authViewModel.attachView(this);
+  // }
+  //
+  // public componentWillUnmount(): void {
+  //   this.authViewModel.detachView();
+  // }
 
-  public componentWillUnmount(): void {
-    this.authViewModel.detachView();
-  }
-
-  public onViewModelChanged(): void {
-    this.setState({
-      emailQuery: this.authViewModel.emailQuery,
-      passwordQuery: this.authViewModel.passwordQuery,
-      isSignInButtonVisible: this.authViewModel.isSignInButtonVisible,
-      isSignOutButtonVisible: this.authViewModel.isSignOutButtonVisible,
-
-      isShowError: this.authViewModel.isShowError,
-      errorMessage: this.authViewModel.errorMessage,
-
-      authStatus: this.authViewModel.authStatus,
-      isAuthStatusPositive: this.authViewModel.isAuthStatusPositive,
-    });
-  }
+  // public onViewModelChanged(): void {
+  //   this.setState({
+  //     emailQuery: this.authViewModel.emailQuery,
+  //     passwordQuery: this.authViewModel.passwordQuery,
+  //     isSignInButtonVisible: this.authViewModel.isSignInButtonVisible,
+  //     isSignOutButtonVisible: this.authViewModel.isSignOutButtonVisible,
+  //
+  //     isShowError: this.authViewModel.isShowError,
+  //     errorMessage: this.authViewModel.errorMessage,
+  //
+  //     authStatus: this.authViewModel.authStatus,
+  //     isAuthStatusPositive: this.authViewModel.isAuthStatusPositive,
+  //   });
+  // }
 
   public render(): JSX.Element {
     const {
