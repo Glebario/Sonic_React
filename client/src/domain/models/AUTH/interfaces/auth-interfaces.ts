@@ -59,8 +59,8 @@ export interface IUserRegister {
 }
 
 export interface IAuthResponse {
+    userResponse: IUser;
     token: string
-    userResponse: IUser
 }
 
 export interface IAuthErrorResponse {

@@ -1,10 +1,11 @@
-import IAuthRepository from "../../models/AUTH/interfaces/IAuthRepository";
-
 import axios, {AxiosResponse, AxiosError} from "axios";
-
+import {injectable} from "inversify";
+import IAuthRepository from "../../models/AUTH/interfaces/IAuthRepository";
 import {AuthorizationResult, RegistrationResult} from '../../models/AUTH/structures/AuthorizationResult';
 import {IUserLogin, IUserRegister} from "../../models/AUTH/interfaces/auth-interfaces";
 
+
+@injectable()
 export default class AuthRepository implements IAuthRepository {
   /**
    * @throws {Error} if credentials have not passed

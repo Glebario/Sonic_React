@@ -1,45 +1,37 @@
-
-
+import "reflect-metadata"
 import React from 'react';
-import { observer, Provider } from "mobx-react";
+import { observer } from "mobx-react";
+import history from "./history";
+import { Router } from "react-router-dom";
+import { Provider } from "inversify-react"
 
-import AuthModel from "./domain/models/AUTH/AuthModel"
-import AuthRepository from "./domain/repositories/AUTH/AuthRepository";
-
-import { LoginPageView } from "./pages/AUTH/login/LoginPageView";
 import {useRoutes} from "./routes";
-import { Router } from 'react-router-dom';
-import {createBrowserHistory} from "history";
+import ioc from "./inversify.config";
+import IAuthModel from "./domain/models/AUTH/interfaces/IAuthModel";
+import {DependencyType} from "./inversify.types";
+
+
 
 @observer
 class App extends React.Component {
+
+
   render(): JSX.Element {
-    // data layer
-    const authRepository = new AuthRepository();
-    const authModel = new AuthModel(authRepository);
 
-    const mainModel = 'mainModel'; //##########################################
+      const authModel = ioc.container.get<IAuthModel>(DependencyType.AuthModel)
 
-    const stores = {
-      authRepository,
-      authModel,
-    };
+      const routes: React.ReactNode = useRoutes(authModel.isUserLoggedIn);
+      console.log(authModel)
 
-    const history = createBrowserHistory()
-    const routes = authModel.isUserLoggedIn ?
-        useRoutes(authModel.isUserLoggedIn, mainModel)
-        :
-        useRoutes(authModel.isUserLoggedIn, authModel)
-
-    return (
-      <Provider {...stores}>
-        <Router history={history}>
-          <div>
-            { routes }
-          </div>
-        </Router>
-      </Provider>
-    );
+      return (
+          <Provider container={ioc.container}>
+              <Router history={history}>
+                <div>
+                  { routes }
+                </div>
+              </Router>
+          </Provider>
+      );
   }
 }
 

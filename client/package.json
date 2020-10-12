@@ -13,13 +13,18 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/yup": "^0.29.7",
     "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
+    "inversify": "^5.0.1",
+    "inversify-react": "^0.4.3",
     "mobx": "^5.15.7",
     "mobx-react": "^6.3.0",
+    "ngx-bootstrap": "^6.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "reflect-metadata": "^0.1.13",
     "typescript": "^3.7.5",
     "yup": "^0.29.3"
   },
@@ -45,5 +50,8 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5"
+  }
 }

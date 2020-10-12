@@ -1,10 +1,11 @@
-import { action, observable } from "mobx";
+import {action, observable} from "mobx";
+import history from "../../../history";
+import {inject, injectable} from "inversify";
 
 import IAuthModel from "./interfaces/IAuthModel";
 import IAuthRepository from "./interfaces/IAuthRepository";
-
 import {
-  ILoginForm, IRegistrationForm, IUser,
+  ILoginForm, IRegistrationForm,
   IUserLogin, IUserRegister,
   IValidateError,
   LoginSchemaName, RegistrationSchemaName,
@@ -12,16 +13,30 @@ import {
   SchemaName
 } from "./interfaces/auth-interfaces";
 import {validate, isValid} from "./validators/FormValidator";
+import IUserModel from "../USER/interfaces/IUserModel";
+import ILocalStorageRepository from "../generalInterfaces/ILocalStorageRepository";
+import {DependencyType} from "../../../inversify.types";
 
+
+
+@injectable()
 export default class AuthModel implements IAuthModel {
-  @observable
-  public isUserLoggedIn: boolean = false;
+
+
+  public constructor(
+      @inject(DependencyType.AuthRepository) private readonly authRepository: IAuthRepository,
+      @inject(DependencyType.UserModel) private userModel: IUserModel,
+      @inject(DependencyType.LocalStorageRepository) private readonly localStorageRepository: ILocalStorageRepository
+
+      // private readonly authRepository: IAuthRepository,
+      // private userModel: IUserModel,
+      // private readonly localStorageRepository: ILocalStorageRepository
+  ) {}
+
 
   @observable
-  public user: IUser | {} = {};
+  public isUserLoggedIn: boolean = !!this.localStorageRepository.jwtToken
 
-  @observable
-  public token: string = '';
 
 
 
@@ -54,8 +69,6 @@ export default class AuthModel implements IAuthModel {
   @observable
   public loadingLogo: boolean = false;
 
-  constructor(private authRepository: IAuthRepository)
-  {}
 
   @action public onEmailQueryChanged = (loginQuery: string): void => {
     this.emailQuery = loginQuery;
@@ -93,7 +106,8 @@ export default class AuthModel implements IAuthModel {
   //########################################################  loginSubmit  ###################################
   @action
   public async loginSubmit(): Promise<void> {
-    //this.loadingLogo = true;
+    console.log(this.isUserLoggedIn)
+    this.loadingLogo = true;
     this.serverErrorMessage = '';
     this.validateErrors = [];
 
@@ -115,14 +129,18 @@ export default class AuthModel implements IAuthModel {
       }
       await this.authRepository.login( user )
           .then((response) => {
-            this.user = response.successResult.userResponse
-            this.token = response.successResult.token
-            this.isUserLoggedIn = true;
+            this.localStorageRepository.addUserData(response.successResult.userResponse)
+            this.localStorageRepository.addJwtToken(response.successResult.token)
+            this.userModel.user = response.successResult.userResponse
           })
 
       this.emailQuery = '';
       this.passwordQuery = '';
-      setTimeout(() => { this.loadingLogo = false; }, 1500)
+      setTimeout(() => {
+        this.loadingLogo = false;
+        this.isUserLoggedIn = true;
+        history.push(`/user/${this.localStorageRepository.userData.localId}`)
+      }, 1500)
     } catch (err) {
       this.serverErrorMessage = err.message;
       setTimeout(() => { this.loadingLogo = false; }, 1500)
@@ -178,8 +196,13 @@ export default class AuthModel implements IAuthModel {
 
   //########################################################  logout  ###################################
   @action
-  public logout(): void {
-    this.isUserLoggedIn = false;
+  public logout = (): void => {
+    this.loadingLogo = true
+    setTimeout(() => {
+      this.loadingLogo = false;
+      this.isUserLoggedIn = false
+      this.localStorageRepository.removeAllData()
+      history.push(`/sign-in`)
+      }, 1500)
   };
-
 }

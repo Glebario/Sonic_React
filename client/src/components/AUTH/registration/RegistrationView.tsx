@@ -5,17 +5,19 @@ import IAuthModel from "../../../domain/models/AUTH/interfaces/IAuthModel";
 import {observer} from "mobx-react";
 
 import {Link} from "react-router-dom";
+import {History} from "history"
 import {ShowValidateError} from "../../shared/ShowValidateError";
 import {LoadingLogo} from "../../shared/LoadingLogo";
 
 interface IProps {
-    model: IAuthModel;
+    model: IAuthModel
+    history: History
 }
 
 @observer
 export default class RegistrationView extends React.Component<IProps> {
     public render(): JSX.Element {
-        const {model} = this.props;
+        const {model, history} = this.props;
 
         if (!model.loadingLogo) {
             return (
@@ -176,6 +178,7 @@ export default class RegistrationView extends React.Component<IProps> {
                                 <button type="submit" onClick={(event) => {
                                     event.preventDefault()
                                     model.registrationSubmit()
+                                    history.push("/sign-in")
                                 }}>
                                     Submit
                                 </button>
