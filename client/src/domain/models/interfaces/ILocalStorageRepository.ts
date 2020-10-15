@@ -1,4 +1,4 @@
-import {IUser} from "../AUTH/interfaces/auth-interfaces";
+import {IUser} from "./auth-interfaces";
 
 export default interface ILocalStorageRepository {
     userData: IUser

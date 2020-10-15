@@ -1,5 +1,5 @@
 import React from "react";
-import IAuthModel from "../../domain/models/AUTH/interfaces/IAuthModel";
+import IAuthModel from "../../domain/models/interfaces/IAuthModel";
 import {LoadingLogo} from "../shared/LoadingLogo";
 
 

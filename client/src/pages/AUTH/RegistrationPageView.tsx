@@ -1,12 +1,12 @@
 import React from "react";
 
-import IAuthModel from "../../domain/models/AUTH/interfaces/IAuthModel";
+import IAuthModel from "../../domain/models/interfaces/IAuthModel";
 
 import RegistrationView from "../../components/AUTH/registration/RegistrationView";
 
 import {History} from "history"
 import {resolve} from "inversify-react";
-import {DependencyType} from "../../inversify.types";
+import DependencyType from "../../inversify.types";
 
 
 interface IProps {

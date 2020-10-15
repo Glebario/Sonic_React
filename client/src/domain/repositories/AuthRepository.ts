@@ -1,8 +1,8 @@
 import axios, {AxiosResponse, AxiosError} from "axios";
 import {injectable} from "inversify";
-import IAuthRepository from "../../models/AUTH/interfaces/IAuthRepository";
-import {AuthorizationResult, RegistrationResult} from '../../models/AUTH/structures/AuthorizationResult';
-import {IUserLogin, IUserRegister} from "../../models/AUTH/interfaces/auth-interfaces";
+import IAuthRepository from "../models/interfaces/IAuthRepository";
+import {AuthorizationResult, RegistrationResult} from '../models/structures/AuthorizationResult';
+import {IUserLogin, IUserRegister} from "../models/interfaces/auth-interfaces";
 
 
 @injectable()
@@ -29,7 +29,7 @@ export default class AuthRepository implements IAuthRepository {
   }
 
   registration(user: IUserRegister): Promise<RegistrationResult> {
-      return new Promise((resolve, reject) => {
+      return new Promise((_resolve, reject) => {
           axios.post('/api/auth/register', user)
               .catch(
                   (err: AxiosError<AuthorizationResult['err']>) => {

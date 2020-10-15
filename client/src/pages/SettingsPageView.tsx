@@ -1,8 +1,7 @@
-import {observer} from "mobx-react";
 import React from "react";
 import {SettingsView} from "../components/settingsView/settingsView";
-import IAuthModel from "../domain/models/AUTH/interfaces/IAuthModel";
-import {DependencyType} from "../inversify.types";
+import IAuthModel from "../domain/models/interfaces/IAuthModel";
+import DependencyType from "../inversify.types";
 import {resolve} from "inversify-react";
 
 

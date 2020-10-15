@@ -3,8 +3,8 @@ import {Switch, Route, Redirect} from "react-router-dom";
 
 import {LoginPageView} from "./pages/AUTH/LoginPageView";
 import {RegistrationPageView} from "./pages/AUTH/RegistrationPageView";
-import IAuthModel from "./domain/models/AUTH/interfaces/IAuthModel";
-import IUserModel from "./domain/models/USER/interfaces/IUserModel";
+import IAuthModel from "./domain/models/interfaces/IAuthModel";
+import IUserModel from "./domain/models/interfaces/IUserModel";
 
 import NavBar from "./components/shared/NavBar/NavBar";
 import {UserPageView} from "./pages/UserPageView";

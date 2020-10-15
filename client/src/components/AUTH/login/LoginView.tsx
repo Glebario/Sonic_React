@@ -4,7 +4,7 @@ import React from 'react';
 import { observer } from "mobx-react";
 import {Link} from "react-router-dom"
 
-import IAuthModel from "../../../domain/models/AUTH/interfaces/IAuthModel";
+import IAuthModel from "../../../domain/models/interfaces/IAuthModel";
 import {LoadingLogo} from "../../shared/LoadingLogo";
 import {ShowValidateError} from "../../shared/ShowValidateError";
 
@@ -22,7 +22,7 @@ export default class LoginView extends React.Component<IProps> {
           return (
               <div className="sign-in-page">
                   <div className="btn-register">
-                      <small>У вас нет аккаунта?<br/>Тогда вам сюда>>></small><Link to="/sign-up">Registration</Link>
+                      <small>У вас нет аккаунта?<br/>Тогда вам сюда{">>>"}</small><Link to="/sign-up">Registration</Link>
                   </div>
 
                   <div className="sign-in-form">

@@ -1,7 +1,7 @@
 import './RegistrationView.css'
 
 import React from "react";
-import IAuthModel from "../../../domain/models/AUTH/interfaces/IAuthModel";
+import IAuthModel from "../../../domain/models/interfaces/IAuthModel";
 import {observer} from "mobx-react";
 
 import {Link} from "react-router-dom";
@@ -23,7 +23,7 @@ export default class RegistrationView extends React.Component<IProps> {
             return (
                 <div className="sign-up-page">
                     <div className="btn-register">
-                        <small>У вас уже есть аккаунт?<br />Тогда вам сюда>>></small><Link to="/sign-in">Sign-In</Link>
+                        <small>У вас уже есть аккаунт?<br />Тогда вам сюда{">>>"}</small><Link to="/sign-in">Sign-In</Link>
                     </div>
 
                     <div className="sign-up-form">

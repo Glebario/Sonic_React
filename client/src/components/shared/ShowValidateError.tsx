@@ -1,4 +1,4 @@
-import {IValidateError} from "../../domain/models/AUTH/interfaces/auth-interfaces";
+import {IValidateError} from "../../domain/models/interfaces/auth-interfaces";
 import React from "react";
 
 export const ShowValidateError = ({fieldName, errors}: {fieldName: string, errors: IValidateError[]}) => {

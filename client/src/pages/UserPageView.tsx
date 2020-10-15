@@ -1,8 +1,8 @@
 import React from "react";
-import IUserModel from "../domain/models/USER/interfaces/IUserModel";
+import IUserModel from "../domain/models/interfaces/IUserModel";
 import UserView from "../components/userView/UserView";
 import {resolve} from "inversify-react";
-import {DependencyType} from "../inversify.types";
+import DependencyType from "../inversify.types";
 
 
 

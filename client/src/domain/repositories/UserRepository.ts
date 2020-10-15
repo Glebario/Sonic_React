@@ -1,5 +1,5 @@
 import {injectable} from "inversify";
-import IUserRepository from "../../models/USER/interfaces/IUserRepository";
+import IUserRepository from "../models/interfaces/IUserRepository";
 
 
 @injectable()

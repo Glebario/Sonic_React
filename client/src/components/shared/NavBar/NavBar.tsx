@@ -3,8 +3,8 @@ import {observer} from "mobx-react";
 import { resolve } from "inversify-react";
 import {NavLink} from "react-router-dom";
 import React, {PropsWithChildren} from "react";
-import {DependencyType} from "../../../inversify.types";
-import IUserModel from "../../../domain/models/USER/interfaces/IUserModel";
+import DependencyType from "../../../inversify.types";
+import IUserModel from "../../../domain/models/interfaces/IUserModel";
 
 
 

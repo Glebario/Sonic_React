@@ -1,5 +1,5 @@
 import React from "react";
-import IUserModel from "../../domain/models/USER/interfaces/IUserModel";
+import IUserModel from "../../domain/models/interfaces/IUserModel";
 import {observer} from "mobx-react";
 
 
@@ -12,7 +12,7 @@ interface IProps {
 export default class UserView extends React.Component<IProps> {
     public render(): JSX.Element {
         const {model} = this.props;
-        console.log()
+        console.log(model)
         //console.log(model)
         return (
             <div>

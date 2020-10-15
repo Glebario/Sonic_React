@@ -3,9 +3,9 @@ import {inject, injectable} from "inversify";
 
 import IUserModel from "./interfaces/IUserModel";
 import IUserRepository from "./interfaces/IUserRepository";
-import ILocalStorageRepository from "../generalInterfaces/ILocalStorageRepository";
-import {IUser} from "../AUTH/interfaces/auth-interfaces";
-import {DependencyType} from "../../../inversify.types";
+import ILocalStorageRepository from "./interfaces/ILocalStorageRepository";
+import {IUser} from "./interfaces/auth-interfaces";
+import DependencyType from "../../inversify.types";
 
 
 

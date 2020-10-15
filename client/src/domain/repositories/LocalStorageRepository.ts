@@ -1,6 +1,6 @@
 import {injectable} from "inversify";
-import ILocalStorageRepository from "../models/generalInterfaces/ILocalStorageRepository";
-import {IUser} from "../models/AUTH/interfaces/auth-interfaces";
+import ILocalStorageRepository from "../models/interfaces/ILocalStorageRepository";
+import {IUser} from "../models/interfaces/auth-interfaces";
 
 
 @injectable()
