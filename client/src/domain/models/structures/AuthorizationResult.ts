@@ -1,4 +1,4 @@
-import {IAuthErrorResponse, IAuthResponse} from "../interfaces/auth-interfaces";
+import { IAuthErrorResponse, IAuthResponse } from '../interfaces/auth-interfaces';
 
 export interface AuthorizationResult {
   successResult: IAuthResponse;
@@ -8,4 +8,3 @@ export interface AuthorizationResult {
 export interface RegistrationResult {
   err?: IAuthErrorResponse
 }
-

@@ -1,0 +1,46 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": [
+        "airbnb-typescript",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:jsx-a11y/recommended",
+        "plugin:sonarjs/recommended"
+    ],
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "optimize-regex",
+        "sonarjs"
+    ],
+    "rules": {
+        "optimize-regex/optimize-regex": "warn",
+        "import/prefer-default-export": "off",
+        "react/jsx-filename-extension": "off",
+        "max-len": ["error", { "code": 150 }],
+        "prefer-destructuring": ["error", {"object": true, "array": false}],
+        "react/require-default-props": ["off", {"ignoreFunctionalComponents": true}],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "packageDir": "./"
+            }
+        ]
+    }
+}
+
+
+

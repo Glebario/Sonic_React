@@ -10,7 +10,7 @@
 
 .form-control-block .input-group {width: 100%; display: block; border: 1px solid #d5dbe0; padding-left: 10px;  outline: none; height: 46px;}
 .form-control-block label { font-weight: normal; }
-.form-control-block label.required:after { content: "*"; color: red; margin-left: 5px; }
+.form-control-block span.required:after { content: "*"; color: red; margin-left: 5px; }
 
 .submit-btn { margin-top: 30px; position: relative; left: 60%; }
 

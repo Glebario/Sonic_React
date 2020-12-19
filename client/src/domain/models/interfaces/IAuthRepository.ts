@@ -1,6 +1,6 @@
-import {AuthorizationResult} from '../structures/AuthorizationResult';
-import {RegistrationResult} from "../structures/AuthorizationResult";
-import {IUserLogin, IUserRegister} from "./auth-interfaces";
+import { AuthorizationResult, RegistrationResult } from '../structures/AuthorizationResult';
+
+import { IUserLogin, IUserRegister } from './auth-interfaces';
 
 export default interface IAuthRepository {
   /**

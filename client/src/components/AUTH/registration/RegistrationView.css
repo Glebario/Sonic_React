@@ -9,7 +9,7 @@
 
 .form-control-block input:not([type="radio"]) {width: 100%; display: block; border: 1px solid #d5dbe0; outline: none; height: 46px;}
 .form-control-block label:not(.radio-btn-label) { font-weight: normal; display: block;}
-.form-control-block label.required:after { content: "*"; color: red; margin-left: 5px; }
+.form-control-block span.required:after { content: "*"; color: red; margin-left: 5px; }
 .radio-btn {display: flex; margin-top: 15px; padding-left: 15px;}
 .radio-btn-label { display: flex; align-items: center}
 .radio-btn-label input[type="radio"] { height: 30px; width: 30px}

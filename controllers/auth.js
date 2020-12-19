@@ -75,18 +75,7 @@ module.exports.register = async function(req, res) {
             })
 
             await userDb.save()
-            const userResponse = {
-                localId: userDb._id,
-                profile: userDb.profile
-            }
-            const token = jwt.sign({
-                email: userDb.email,
-                userId: userDb._id
-            }, keys.jwt, {expiresIn: 60 * 60})
-            res.status(201).json({
-                token: `Bearer ${token}`,
-                userResponse
-            })
+            res.status(201).json()
         }
     } catch(e) {
         error(res, e)

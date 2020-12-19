@@ -8,7 +8,7 @@
     // path to output directory
     "outDir": "./dist/",
     // enable strict null checks as a best practice
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "strictPropertyInitialization": false,
     // Search under node_modules for non-relative imports.
     "moduleResolution": "node",

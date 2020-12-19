@@ -1,19 +1,16 @@
-import React from "react";
-import {SettingsView} from "../components/settingsView/settingsView";
-import IAuthModel from "../domain/models/interfaces/IAuthModel";
-import DependencyType from "../inversify.types";
-import {resolve} from "inversify-react";
-
-
+import React from 'react';
+import { resolve } from 'inversify-react';
+import DependencyType from '../inversify.types';
+import { SettingsView } from '../components/settingsView/settingsView';
+import IAuthModel from '../domain/models/interfaces/IAuthModel';
 
 export class SettingsPageView extends React.Component {
+  @resolve(DependencyType.AuthModel)
+  private readonly authModel: IAuthModel;
 
-    @resolve(DependencyType.AuthModel) private readonly authModel: IAuthModel
-
-    public render(): JSX.Element {
-
-        return (
-            <SettingsView model={this.authModel} />
-        )
-    }
+  render(): JSX.Element {
+    return (
+      <SettingsView model={this.authModel} />
+    );
+  }
 }

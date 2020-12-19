@@ -1,4 +1,4 @@
-a { color: #383e41}
+.container a { color: #383e41}
 
 .avatarBlock { border-right: 2px dashed #c4ced2; }
 
@@ -89,8 +89,8 @@ a { color: #383e41}
 .confirmBtn { margin-top: 20px; color: black; font-size: 20px; font-weight: 800; cursor: pointer; transition: all 300ms ease-in; padding: 7px 14px; border: none; background-color: transparent; border-radius: 50%}
 .confirmBtn:hover { background-color: black; color: white }
 
-.posts { padding-top: 20px; border-top: 2px solid #c4ced2;}
-.posts ul { padding: 0; margin: 0; }
+.postsContainer { padding-top: 20px; border-top: 2px solid #c4ced2;}
+.postsContainer ul { padding: 0; margin: 0; }
 .post { list-style: none; width: 100%; padding: 3px; cursor: pointer;}
 .imgPostBlock { background-color: white; position: relative;}
 .imgPost { width: 100% }

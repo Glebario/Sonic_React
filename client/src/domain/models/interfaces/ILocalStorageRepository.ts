@@ -1,12 +1,22 @@
-import {IUser} from "./auth-interfaces";
+import { IPostPreview } from './post-interfaces';
+import { IUser, TypeLocalStorageUserKeys } from './generic-interfaces';
+
 
 export default interface ILocalStorageRepository {
-    userData: IUser
-    jwtToken: any
 
-    addUserData(user: IUser): void
+  addUserData(user: IUser, typeUser: TypeLocalStorageUserKeys): void
 
-    addJwtToken(token: string): void
+  addUserPosts(posts: IPostPreview[], typeUser: TypeLocalStorageUserKeys): void
 
-    removeAllData(): void
+  addJwtToken(token: string): void
+
+  removeAllData(): void
+
+  getJWT(): string
+
+  getOwnerUserData(): IUser
+  getOtherUserData(): IUser
+
+  getOwnerUserPostsData(): IPostPreview[]
+  getOtherUserPostsData(): IPostPreview[]
 }

@@ -1,4 +1,4 @@
-import {IValidateError, Schema, SchemaName} from "./auth-interfaces";
+import { IValidateError, Schema, SchemaName } from './auth-interfaces';
 
 export default interface IAuthModel {
   // Temporary property, should be moved to AuthService
@@ -26,8 +26,9 @@ export default interface IAuthModel {
 
   validateForm(schemaName: SchemaName, formValue: Schema): void
 
-
   loginSubmit(): void;
   registrationSubmit(): void;
   logout(): void;
+
+  updateSession(): void
 }

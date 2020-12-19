@@ -1,19 +1,19 @@
-import React from "react";
-import IUserModel from "../domain/models/interfaces/IUserModel";
-import UserView from "../components/userView/UserView";
-import {resolve} from "inversify-react";
-import DependencyType from "../inversify.types";
+import React from 'react';
+import { RouteComponentProps } from 'react-router';
+import { resolve } from 'inversify-react';
+import DependencyType from '../inversify.types';
+import UserView from '../components/userView/UserView';
+import IUserModel from '../domain/models/interfaces/IUserModel';
 
+export class UserPageView extends React.Component<RouteComponentProps> {
+  @resolve(DependencyType.UserModel)
+  private readonly userModel: IUserModel;
 
+  render(): JSX.Element {
+    const { match } = this.props;
 
-export class UserPageView extends React.Component {
-
-    @resolve(DependencyType.UserModel) private readonly userModel: IUserModel;
-
-    render(): JSX.Element {
-
-        return (
-            <UserView model={this.userModel} />
-        );
-    }
+    return (
+      <UserView model={this.userModel} match={match} />
+    );
+  }
 }
