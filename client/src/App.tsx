@@ -1,32 +1,39 @@
 import React from 'react';
-import './App.css';
-import AuthFakeApi from "./data/auth/AuthFakeApi";
-import AuthBusinessStore from "./domain/entity/auth/models/AuthBusinessStore";
-import LoginUseCase from "./domain/interactors/auth/LoginUseCase";
-import AuthViewStoreImpl from "./presentation/view-model/auth/AuthViewStoreImpl";
-import AuthComponent from "./presentation/view/auth/AuthComponent";
-import {Provider} from "mobx-react";
+// import { BrowserRouter } from 'react-router-dom';
+import { observer } from 'mobx-react';
+// import { Provider } from 'inversify-react';
+import { resolve } from 'inversify-react';
+// import ioc from './inversify.config';
+import DependencyType from './inversify.types';
+// import history from './history';
+import { useRoutes } from './routes';
+import IAuthModel from './domain/models/interfaces/IAuthModel';
 
-function App(): JSX.Element {
-  // data layer
-  const authRepository = new AuthFakeApi();
-  // domain layer
-  const authHolder = new AuthBusinessStore();
-  const loginUseCase = new LoginUseCase(authRepository, authHolder);
-  // view r
-  const authViewStore = new AuthViewStoreImpl(loginUseCase, authHolder);
+import { setInterceptors } from './utils/token-interceptor';
 
-  const stores = {
-      authViewStore
-  }
+@observer
+class App extends React.Component {
+  @resolve(DependencyType.AuthModel)
+  private readonly authModel: IAuthModel;
+
+  render(): JSX.Element {
+    setInterceptors();
+    this.authModel.updateSession();
+    const routes: React.ReactNode = useRoutes(this.authModel.isUserLoggedIn);
 
     return (
-      <Provider {...stores}>
-          <div className="app-container d-flex container-fluid">
-            <AuthComponent />
-          </div>
-      </Provider>
-  );
+      <div>
+        {/*<div>*/}
+        {/*  <h1>*/}
+        {/*    {`${this.authModel.isUserLoggedIn}`}*/}
+        {/*  </h1>*/}
+        {/*</div>*/}
+        <div>
+          {routes}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

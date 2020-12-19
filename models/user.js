@@ -33,6 +33,10 @@ const userSchema = new Schema({
       type: Types.ObjectId,
       required: false
     }],
+    posts: [{
+      type: Types.ObjectId,
+      required: false
+    }],
     followers: [{
       type: Types.ObjectId, ref: 'Followers',
       required: false
